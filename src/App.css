@@ -1,0 +1,269 @@
+:root {
+  --bg: linear-gradient(180deg, #0d1117 0%, #161b22 100%);
+  --card-bg: linear-gradient(180deg, #1a1f27 0%, #202833 100%);
+  --text: #ffffff;
+  --text-muted: #9ba1ae;
+  --border-line: rgba(128, 128, 128, 0.278);
+  --accent: #ff9f3f;
+}
+
+.podcast-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  padding: 40px;
+}
+
+.text-muted {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.seasons-text {
+  color: var(--accent);
+}
+.genre-tags {
+  display: flex;
+  flex-direction: rows;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+.genre-pill {
+  color: var(--accent);
+  background-color: #161b22;
+  padding: 10px;
+  font-size: 12px;
+  border-radius: 12px;
+}
+
+.pod-cover {
+  width: 300px;
+  height: 250px;
+  border: var(--text-muted) 0.5px solid;
+}
+
+.card {
+  background: var(--card-bg);
+  border: var(--text-muted) 0.2px solid;
+  border-radius: 16px;
+  padding: 24px;
+  transition: all 0.3s ease-in-out;
+}
+
+.card:hover {
+  background: #1a1f27;
+  transform: scale(1.01);
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+:root {
+  --bg: linear-gradient(180deg, #0d1117 0%, #161b22 100%);
+  --card-bg: linear-gradient(180deg, #1a1f27 0%, #202833 100%);
+  --text: #ffffff;
+  --text-muted: #9ba1ae;
+  --border-line: rgba(128, 128, 128, 0.278);
+  --accent: #ff9f3f;
+}
+
+/* Base button */
+.pagination button {
+  background: var(--card-bg);
+  color: var(--text);
+  border: 1px solid var(--border-line);
+  padding: 0.45rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+}
+
+.pagination button:hover:not(:disabled) {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.pagination button[aria-current="page"] {
+  background: var(--accent);
+  color: #0d1117;
+  border-color: var(--accent);
+  font-weight: 600;
+}
+
+.pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/*
+=============================================================
+  MOBILE STYLING
+=============================================================
+*/
+
+@media (min-width: 300px) and (max-width: 739px) {
+  h1 {
+    font-size: 16px;
+    margin-top: 0;
+  }
+
+  p {
+    font-size: 12px;
+  }
+  h2 {
+    font-size: 20px;
+  }
+  h3 {
+    font-size: 16px;
+  }
+
+  label {
+    font-size: 12px;
+  }
+  select {
+    padding: 4px;
+  }
+
+  .app-identity {
+    margin-bottom: 8px;
+    margin-top: 0;
+    gap: 8px;
+  }
+
+  .app-logo {
+    width: 24px;
+    height: 24px;
+    margin: 16px 0px 0px 16px;
+  }
+
+  .search-icon,
+  .profile-pic {
+    width: 16px;
+  }
+
+  .user-section {
+    margin-bottom: 0;
+    margin-right: 16px;
+  }
+
+  .podcast-grid {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    margin-top: 20px;
+  }
+  .pod-cover {
+    width: 310px;
+    height: 250px;
+    margin: 4px;
+  }
+  .card {
+    width: 340px;
+    background: var(--card-bg);
+    padding: 12px;
+  }
+
+  .text-muted {
+    font-size: 12px;
+  }
+
+  .modal {
+    background: var(--card-bg);
+    width: 300px;
+    height: 600px;
+    padding: 20px;
+  }
+  .podcast-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .modal-image {
+    width: 250px;
+    height: 250px;
+    border-radius: 8px;
+  }
+
+  .season-row {
+    width: 40vh;
+    padding: 20px;
+  }
+}
+
+/*
+=============================================================
+  TABLET STYLING
+=============================================================
+*/
+
+@media (min-width: 740px) and (max-width: 1023px) {
+  h1 {
+    font-size: 16px;
+    margin-top: 0;
+  }
+
+  p {
+    font-size: 12px;
+  }
+  h2 {
+    font-size: 20px;
+  }
+  h3 {
+    font-size: 16px;
+  }
+
+  label {
+    font-size: 12px;
+  }
+  select {
+    padding: 4px;
+  }
+
+  .podcast-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .pod-cover {
+    width: 310px;
+    height: 250px;
+    margin: 4px;
+  }
+  .card {
+    width: 320px;
+    background: var(--card-bg);
+    padding: 14px;
+  }
+
+  .text-muted {
+    font-size: 12px;
+  }
+
+  .modal {
+    background: var(--card-bg);
+    width: 600px;
+    height: 600px;
+    padding: 20px;
+  }
+
+  .podcast-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px;
+  }
+  .season-row {
+    width: 50vh;
+    padding: 24px 6px;
+  }
+}

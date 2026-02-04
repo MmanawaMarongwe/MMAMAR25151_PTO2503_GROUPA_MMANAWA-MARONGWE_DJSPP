@@ -1,0 +1,140 @@
+/***************************************************************
+=============================================================
+ SHOW DETAIL STYLES
+=============================================================
+***************************************************************/
+
+/* Make sizing predictable across breakpoints */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.show-detail {
+  margin: 1rem;
+  padding: clamp(1rem, 4vw, 2rem);
+}
+
+.show-detail-cover {
+  background: var(--card-bg);
+  padding: clamp(1rem, 3vw, 2rem);
+  margin-top: 1rem;
+  border-radius: 12px;
+}
+
+
+/* Shared image styling */
+.podcast-cover {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  margin-top: 0;
+  border-radius: 8px;
+}
+
+/* Podcast info layout */
+.podcast-info {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3rem;
+  padding: 16px;
+}
+
+.image-grid {
+  grid-column: span 3;
+  margin-top: 16px;
+}
+
+.info-grid {
+  grid-column: span 4;
+}
+
+/* Seasons */
+.season-row {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: solid 1px var(--border-line);
+  padding: 32px;
+  margin: 8px 0;
+  border-radius: 16px;
+}
+
+.season-title {
+  font-weight: 600;
+}
+
+.episodes-count {
+  color: var(--accent);
+}
+
+.genre-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+}
+
+.tag {
+  color: var(--accent);
+  background-color: #161b22;
+  padding: 10px;
+  font-size: 12px;
+  border-radius: 12px;
+}
+
+/*
+=============================================================
+  RESPONSIVE BREAKPOINTS
+=============================================================
+*/
+
+@media (max-width: 1023px) {
+  .podcast-info {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    padding: 12px;
+  }
+
+  .image-grid,
+  .info-grid {
+    grid-column: auto;
+  }
+
+  .podcast-cover {
+    max-width: 100%;
+  }
+
+  .season-row {
+    width: 100%;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .show-detail {
+    margin: 0.75rem;
+    padding: 1rem;
+  }
+
+  .season-row {
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .tag {
+    padding: 8px;
+    font-size: 11px;
+  }
+}
+
+/* Prevent long text from overflowing */
+.season-title,
+.text-muted {
+  word-break: break-word;
+}

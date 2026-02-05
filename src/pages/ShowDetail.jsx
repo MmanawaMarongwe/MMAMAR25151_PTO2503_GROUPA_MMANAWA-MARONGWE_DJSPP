@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { fetchSinglePodcast } from "../api/fetchData";
 import { fetchGenreTitles } from "../api/fetchGenres";
 import { useState, useEffect } from "react";
-import {ShowCover, ShowDetailHeader, ShowInfo, SeasonList, GenreTags} from "./index"
+import {ShowCover, ShowDetailHeader, ShowInfo, SeasonList, GenreTags} from "../components/index"
 import "./showDetail.css";
 
 

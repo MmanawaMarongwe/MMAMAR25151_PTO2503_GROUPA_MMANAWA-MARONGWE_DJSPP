@@ -1,10 +1,14 @@
+// src/App.jsx
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import { fetchPodcasts } from "./api/fetchData";
-import { PodcastGrid, Filters } from "./components/index";
+
+import { fetchPodcasts } from "./api/fetchData";  
 import { PodcastProvider } from "./context/PodcastContext";
+
+import Home from "./pages/Home";
 import ShowDetail from "./pages/ShowDetail";
-import { ErrorBoundary, Header, Pagination } from "./UI/index";
+
+import { ErrorBoundary, Header } from "./UI/index";
 import "./App.css";
 
 export default function App() {
@@ -14,20 +18,14 @@ export default function App() {
 
   useEffect(() => {
     async function loadPodcasts() {
-      try {
-        setLoading(true);
-        setError(null);
+      setLoading(true);
+      setError(null);
 
-        const podcastsArray = await fetchPodcasts(
-          setPodcasts,
-          setError,
-          setLoading,
-        );
-        if (Array.isArray(podcastsArray)) setPodcasts(podcastsArray);
+      try {
+        await fetchPodcasts(setPodcasts, setError, setLoading);
       } catch (err) {
         console.error(err);
         setError("Failed to load podcasts. Please try again later.");
-      } finally {
         setLoading(false);
       }
     }
@@ -49,19 +47,7 @@ export default function App() {
         {!error && !loading && (
           <PodcastProvider initialPodcasts={podcasts}>
             <Routes>
-              <Route
-                path="/"
-                element={
-                  <>
-                    <Filters />
-                    <main>
-                      <PodcastGrid />
-                      <Pagination />
-                    </main>
-                  </>
-                }
-              />
-
+              <Route path="/" element={<Home />} />
               <Route path="/show/:id" element={<ShowDetail />} />
             </Routes>
           </PodcastProvider>

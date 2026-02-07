@@ -7,11 +7,21 @@
   --accent: #ff9f3f;
 }
 
+/* Light theme overrides (applied when data-theme="light" is set on <html>) */
+html[data-theme="light"] {
+  --bg: linear-gradient(180deg, #f7f9fc 0%, #eef2f7 100%);
+  --card-bg: linear-gradient(180deg, #ffffff 0%, #f3f6fb 100%);
+  --text: #0d1117;
+  --text-muted: #4b5563;
+  --border-line: rgba(0, 0, 0, 0.12);
+  --accent: #ff9f3f;
+}
+
 body {
   background: var(--bg) fixed no-repeat;
   background-size: cover;
   font-family: "Inter", sans-serif;
-  color: white;
+  color: var(--text);
 }
 
 header {
@@ -26,7 +36,7 @@ header {
 }
 
 h1 {
-  font-size: 48px;
+  font-size: 40px;
   font-weight: 600;
   color: var(--text);
 }
@@ -88,9 +98,32 @@ a:visited {
   gap: 32px;
 }
 
-.search-icon,
 .profile-pic {
   width: 48px;
+}
+
+/* Theme toggle button + icon */
+.theme-toggle {
+  width: 28px;
+  height: 28px;
+  color: var(--accent);
+  display: block;
+}
+
+.theme-toggle-btn {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 8px;
 }
 
 .search-bar {

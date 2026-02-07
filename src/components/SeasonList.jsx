@@ -84,10 +84,10 @@ export default function SeasonList({ seasons = [],showId, showTitle}) {
                               toggleFavorite({
                               showId,
                               showTitle,
-                              episodeId: ep.id,
-                              episodeTitle: ep.title || `Episode ${ep.episode ?? idx + 1}`,
+                              episodeId,
+                              episodeTitle: epTitle,
                               seasonNumber: seasonNum,
-                              episodeNumber: ep.episode ?? idx + 1})}}>
+                              episodeNumber: epNumber})}}>
                                 {favorited ? "❤️" : "🤍"}
                           </button>
                         </div>

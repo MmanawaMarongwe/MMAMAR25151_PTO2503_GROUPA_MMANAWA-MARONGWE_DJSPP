@@ -73,16 +73,11 @@
   color: var(--accent);
 }
 
-.genre-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-
-}
 
 .tag {
   color: var(--accent);
-  background-color: #161b22;
+  background: var(--card-bg);
+  border: 1px solid var(--border-line);
   padding: 10px;
   font-size: 12px;
   border-radius: 12px;

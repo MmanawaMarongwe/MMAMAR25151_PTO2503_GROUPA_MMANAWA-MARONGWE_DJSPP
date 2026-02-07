@@ -27,8 +27,8 @@ export default function Header({ theme, onToggleTheme }) {
           aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
           title={theme === "dark" ? "Switch to light" : "Switch to dark"}
         >
-          <span aria-hidden="true">{theme === "dark" ? "☀️" : "🌙"}</span>
-          <span>{theme === "dark" ? "Light" : "Dark"}</span>
+          <span aria-hidden="true">{theme === "dark" ? "🌑" : "☀️"}</span>
+          
         </button>
         <img
           src={userImg}

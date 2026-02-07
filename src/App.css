@@ -22,7 +22,8 @@
 
 .genre-pill {
   color: var(--accent);
-  background-color: var(--pill-bg);
+  background: var(--card-bg);
+  border: 1px solid var(--border-line);
   padding: 10px;
   font-size: 12px;
   border-radius: 12px;
@@ -125,14 +126,17 @@
     margin: 16px 0px 0px 16px;
   }
 
-  .search-icon,
   .profile-pic {
-    width: 16px;
+    width: 28px;
+  }
+   
+  .theme-toggle{
+    padding: 6px;
   }
 
   .user-section {
     margin-bottom: 0;
-    margin-right: 16px;
+    margin-right: 12px;
   }
 
   .podcast-grid {

@@ -15,6 +15,23 @@ export default function App() {
   const [podcasts, setPodcasts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [theme, setTheme] = useState("dark");
+
+  
+ useEffect(() => {
+  document.documentElement.setAttribute("data-theme", theme);
+  localStorage.setItem("app-theme", theme);
+}, [theme]);
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("app-theme", theme);
+  }, [theme]);
+
+
+  function toggleTheme() {
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+  }
 
   useEffect(() => {
     async function loadPodcasts() {
@@ -35,7 +52,7 @@ export default function App() {
 
   return (
     <>
-      <Header />
+      <Header theme={theme} onToggleTheme={toggleTheme} />
 
       <ErrorBoundary>
         {error && (

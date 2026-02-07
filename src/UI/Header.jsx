@@ -1,5 +1,4 @@
 import podcastLogo from "../assets/podcast-logo.png";
-import searchIcon from "../assets/search-icon.png";
 import userImg from "../assets/user-profile.png";
 
 /**

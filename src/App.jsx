@@ -1,4 +1,4 @@
-// src/App.jsx
+
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
@@ -15,7 +15,14 @@ export default function App() {
   const [podcasts, setPodcasts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [theme, setTheme] = useState("dark");
+  
+
+  const THEME_KEY = "app-theme";
+
+  const [theme, setTheme] = useState(() => {
+    const saved = localStorage.getItem(THEME_KEY);
+    return saved === "light" || saved === "dark" ? saved : "dark"; 
+});
 
   
  useEffect(() => {

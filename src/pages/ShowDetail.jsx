@@ -89,7 +89,8 @@ const hide = (value) => HIDE_GENRES.has(String(value).trim().toLowerCase());
         </div>
 
         <div>
-            <SeasonList seasons={show?.seasons || []} />
+            <SeasonList seasons={show?.seasons || []} showId={show.id}
+                showTitle={show.title} />
           </div>
           </div>
           </> )}

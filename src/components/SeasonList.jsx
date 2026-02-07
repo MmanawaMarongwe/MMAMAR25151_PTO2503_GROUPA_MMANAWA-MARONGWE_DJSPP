@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { useFavorites } from "../context/FavoritesContext"; 
 
 /**
  * SeasonList
@@ -11,9 +12,11 @@ import { useMemo, useState } from "react";
  * @returns {JSX.Element}
  */
 
-export default function SeasonList({ seasons = [] }) {
+export default function SeasonList({ seasons = [],showId, showTitle}) {
   const [openSeasonKey, setOpenSeasonKey] = useState(null);
+  const { toggleFavorite, isEpisodeFavorited } = useFavorites();
 
+   
   function toggleSeason(key) {
     setOpenSeasonKey((prev) => (prev === key ? null : key)); // ⭐
   }
@@ -23,7 +26,8 @@ export default function SeasonList({ seasons = [] }) {
       {seasons.map((season, i) => {
         const key = season?.id ?? i;
         const isOpen = openSeasonKey === key; // ⭐
-
+        const seasonNum = i + 1;
+        
         return (
           <div className="season" key={key}>
             <div
@@ -36,7 +40,7 @@ export default function SeasonList({ seasons = [] }) {
               }}
               style={{ cursor: "pointer" }}
             >
-              <strong className="season-title">{season?.title || `Season ${i + 1}`}</strong>
+              <strong className="season-title">{season?.title || `Season ${seasonNum}`}</strong>
               <span className="text-muted episodes-count">
                 {(season?.episodes?.length || 0)} episode{(season?.episodes?.length || 0) === 1 ? "" : "s"}
               </span>
@@ -53,6 +57,9 @@ export default function SeasonList({ seasons = [] }) {
                     epDescription.length > 140
                       ? `${epDescription.slice(0, 140)}…`
                       : epDescription;
+                  const episodeId = ep?.id ?? epKey;
+                const favorited = isEpisodeFavorited(episodeId);
+
 
                   return (
                     <div key={epKey} className="season">
@@ -64,6 +71,25 @@ export default function SeasonList({ seasons = [] }) {
                               {shortDesc}
                             </p>
                           )}
+
+                         
+
+                          <button
+                            type="button"
+                            className={`fav-btn ${favorited ? "is-fav" : ""}`}
+                            aria-label={favorited ? "Remove from favorites" : "Add to favorites"}
+                            title={favorited ? "Unfavorite" : "Favorite"}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              toggleFavorite({
+                              showId,
+                              showTitle,
+                              episodeId: ep.id,
+                              episodeTitle: ep.title || `Episode ${ep.episode ?? idx + 1}`,
+                              seasonNumber: seasonNum,
+                              episodeNumber: ep.episode ?? idx + 1})}}>
+                                {favorited ? "❤️" : "🤍"}
+                          </button>
                         </div>
                       </div>
                     </div>

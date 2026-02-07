@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 
 import { fetchPodcasts } from "./api/fetchData";  
 import { PodcastProvider } from "./context/PodcastContext";
+import { FavoritesProvider } from "./context/FavoritesContext";
 
 import Home from "./pages/Home";
 import ShowDetail from "./pages/ShowDetail";
@@ -70,10 +71,12 @@ export default function App() {
 
         {!error && !loading && (
           <PodcastProvider initialPodcasts={podcasts}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/show/:id" element={<ShowDetail />} />
-            </Routes>
+            <FavoritesProvider>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/show/:id" element={<ShowDetail />} />
+              </Routes>
+            </FavoritesProvider>
           </PodcastProvider>
         )}
       </ErrorBoundary>

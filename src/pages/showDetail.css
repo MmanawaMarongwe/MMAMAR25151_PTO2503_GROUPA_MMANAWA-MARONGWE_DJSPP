@@ -83,6 +83,12 @@
   border-radius: 12px;
 }
 
+.home-fav-wrapper{
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  margin-right: 80px;
+}
 /*
 =============================================================
   RESPONSIVE BREAKPOINTS

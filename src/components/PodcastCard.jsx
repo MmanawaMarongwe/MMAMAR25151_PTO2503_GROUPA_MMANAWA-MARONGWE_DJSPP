@@ -39,7 +39,7 @@ export default function PodcastCard({
             </span>
           ))}
         </div>
-        <div className="home-fav-link">
+        <div className="date-favicon-wrapper">
           <p id="updated" className="text-muted">
             Updated {updated}
           </p>

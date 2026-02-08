@@ -20,7 +20,7 @@ export default function Header({ theme, onToggleTheme }) {
         <h1 className="app-name">CodeCast</h1>
       </div>
 
-      <div>
+      <div className="home-fav-wrapper">
         <Link to="/">
               <button className="genre-pill">Home</button>
         </Link>

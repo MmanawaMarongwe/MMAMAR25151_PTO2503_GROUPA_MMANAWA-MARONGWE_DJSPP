@@ -20,6 +20,7 @@ html[data-theme="light"] {
   --pill-bg: #DCDCDC;
   --card-hover-bg: #f7f8fa;
   --page-active-text: #0d1117;
+   scrollbar-gutter: stable;
 }
 
 body {

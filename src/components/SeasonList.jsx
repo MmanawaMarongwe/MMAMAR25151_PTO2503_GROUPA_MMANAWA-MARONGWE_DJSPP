@@ -57,7 +57,7 @@ export default function SeasonList({ seasons = [],showId, showTitle}) {
                     epDescription.length > 140
                       ? `${epDescription.slice(0, 140)}…`
                       : epDescription;
-                  const episodeId = ep?.id ?? epKey;
+                  const episodeId = ep?.id ?? `${showId}-s${seasonNum}-e${epNumber}`;
                 const favorited = isEpisodeFavorited(episodeId);
 
 
@@ -72,8 +72,7 @@ export default function SeasonList({ seasons = [],showId, showTitle}) {
                             </p>
                           )}
 
-                         
-
+                        
                           <button
                             type="button"
                             className={`fav-btn ${favorited ? "is-fav" : ""}`}

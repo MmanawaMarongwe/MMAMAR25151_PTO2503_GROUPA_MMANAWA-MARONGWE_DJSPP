@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useFavorites } from "../context/FavoritesContext";
 
 /**
  * Simple presentational card for a single podcast.
@@ -20,6 +21,9 @@ export default function PodcastCard({
   genres = [],
   updated,
 }) {
+  const { hasFavoritesForShow } = useFavorites();
+    const isFavorited = hasFavoritesForShow(String(id));
+
   return (
     <Link to={`/show/${id}`} className="card">
       <img src={image} className="pod-cover" alt="" />
@@ -35,9 +39,17 @@ export default function PodcastCard({
             </span>
           ))}
         </div>
-        <p id="updated" className="text-muted">
-          Updated {updated}
-        </p>
+        <div className="home-fav-link">
+          <p id="updated" className="text-muted">
+            Updated {updated}
+          </p>
+          <span
+            className= { `show-heart ${isFavorited ? "active" : ""}`}
+            aria-label= { isFavorited ? "This show has favorited episodes" : "No favorited episodes"}
+              title= { isFavorited ? "Has favorited episodes" : "No favorited episodes" } >
+                {isFavorited ? "❤️" : "🤍"}
+          </span>
+        </div>
       </div>
     </Link>
   );

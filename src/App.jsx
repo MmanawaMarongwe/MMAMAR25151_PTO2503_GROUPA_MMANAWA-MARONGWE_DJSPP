@@ -8,6 +8,7 @@ import { FavoritesProvider } from "./context/FavoritesContext";
 
 import Home from "./pages/Home";
 import ShowDetail from "./pages/ShowDetail";
+import Favorites from "./pages/Favorites"
 
 import { ErrorBoundary, Header } from "./UI/index";
 import "./App.css";
@@ -75,6 +76,7 @@ export default function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/show/:id" element={<ShowDetail />} />
+                <Route path="/favorites" element={<Favorites />} />
               </Routes>
             </FavoritesProvider>
           </PodcastProvider>

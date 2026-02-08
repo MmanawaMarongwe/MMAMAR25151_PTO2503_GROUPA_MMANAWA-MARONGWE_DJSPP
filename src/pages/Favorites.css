@@ -1,0 +1,48 @@
+.favorites-page {
+  padding: 24px;
+}
+
+.favorites-title {
+  margin: 0;
+}
+
+.favorites-empty {
+  margin-top: 8px;
+}
+
+.favorites-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.favorites-sort {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.favorites-groups {
+  margin-top: 20px;
+  display: grid;
+  gap: 16px;
+}
+
+.favorites-show-title {
+  margin-top: 0;
+}
+
+.favorites-episodes {
+  display: grid;
+  gap: 12px;
+}
+
+.favorites-episode {
+  align-items: flex-start;
+}
+
+.favorites-episode-meta {
+  display: grid;
+  gap: 4px;
+}

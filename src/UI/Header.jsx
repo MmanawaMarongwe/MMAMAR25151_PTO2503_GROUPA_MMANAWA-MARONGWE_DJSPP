@@ -1,5 +1,6 @@
 import podcastLogo from "../assets/podcast-logo.png";
 import userImg from "../assets/user-profile.png";
+import { Link } from "react-router-dom";
 
 /**
  * Header
@@ -17,6 +18,15 @@ export default function Header({ theme, onToggleTheme }) {
           className="app-logo"
         />
         <h1 className="app-name">CodeCast</h1>
+      </div>
+
+      <div>
+        <Link to="/">
+              <button className="genre-pill">Home</button>
+        </Link>
+        <Link to="/favorites">
+              <button className="genre-pill">Favorites</button>
+        </Link>
       </div>
 
       <div className="user-section">

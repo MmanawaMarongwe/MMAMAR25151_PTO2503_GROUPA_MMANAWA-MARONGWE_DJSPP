@@ -1,5 +1,10 @@
 .carousel-section {
-  padding: 0 24px 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.carousel-header {
+  width: 100%;
 }
 
 .carousel-header {
@@ -41,8 +46,6 @@
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
 
-  /* Optional: nicer feel */
-  -webkit-overflow-scrolling: touch;
 }
 
 .carousel-track::-webkit-scrollbar {
@@ -63,11 +66,7 @@
   overflow: hidden;
 }
 
-.carousel-image-wrap {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-}
+
 
 .carousel-image {
   width: 100%;
@@ -87,30 +86,18 @@
   font-size: 16px;
 }
 
-.carousel-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
 .carousel-track {
   display: flex;
+  flex-direction: row;
   gap: 16px;
-
   overflow-x: auto;
+  overflow-y: hidden;
   padding-bottom: 8px;
+  -webkit-overflow-scrolling: touch;
 }
 
 .carousel-item {
-  flex: 0 0 auto; /* prevents shrinking */
+  flex: 0 0 auto;
 }
 
-.carousel-dummy {
-  width: 260px;
-  height: 180px;
-  border: 1px solid var(--border-line);
-  background: var(--card-bg);
-  border-radius: 16px;
-  display: grid;
-  place-items: center;
-}
+

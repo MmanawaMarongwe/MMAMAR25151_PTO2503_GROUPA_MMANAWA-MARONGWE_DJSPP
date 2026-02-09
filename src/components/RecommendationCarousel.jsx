@@ -30,11 +30,36 @@ export default function RecommendationCarousel({
         </button>
       </div>
        <div className="carousel-track" ref={scrollerRef}>
-         {Array.from({ length: 6 }).map((_, i) => (
-         <div key={i} className="carousel-item">
-           <div className="carousel-dummy">Card {i + 1}</div>
-         </div>
-         ))}
+         {items.map((show) => {
+  const showId = String(show.id);
+
+  const genreIds = (show.genres || show.genreIds || []).map(String);
+  const genreNames = genreIds
+    .map((id) => genreMap.get(id))
+    .filter(Boolean)
+    .slice(0, 3);
+
+  const seasonsCount =
+    typeof show.seasons === "number"
+      ? show.seasons
+      : Array.isArray(show.seasons)
+      ? show.seasons.length
+      : show.seasonCount ?? 0;
+
+  return (
+    <div key={showId} className="carousel-item">
+      <Link to={`/show/${showId}`} className="carousel-link">
+        <PodcastCard
+          title={show.title}
+          image={show.image}
+          seasons={seasonsCount}
+          genres={genreNames}
+          updated={show.updated ?? ""}
+        />
+      </Link>
+    </div>
+  );
+})}
       </div>
     </div>
   </section>

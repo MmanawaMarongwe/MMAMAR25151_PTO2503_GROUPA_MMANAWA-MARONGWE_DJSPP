@@ -92,3 +92,11 @@
   flex-wrap: wrap;
   gap: 8px;
 }
+
+.carousel-track {
+  display: flex;
+  gap: 16px;
+
+  overflow-x: auto;
+  padding-bottom: 8px;
+}

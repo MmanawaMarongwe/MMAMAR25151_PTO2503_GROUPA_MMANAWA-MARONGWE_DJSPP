@@ -28,6 +28,9 @@ export default function RecommendationCarousel({
           →
         </button>
       </div>
+       <div className="carousel-track" ref={scrollerRef}>
+        {/* cards will go here next */}
+      </div>
     </div>
   </section>
 );

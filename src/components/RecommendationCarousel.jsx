@@ -2,6 +2,7 @@ import { useMemo, useRef } from "react";
 import { Link } from "react-router-dom";
 import { genres } from "../data";
 import PodcastCard from "./PodcastCard";
+import "./RecommendationCarousel.css"
 
 export default function RecommendationCarousel({
   shows = [],
@@ -29,7 +30,11 @@ export default function RecommendationCarousel({
         </button>
       </div>
        <div className="carousel-track" ref={scrollerRef}>
-        {/* cards will go here next */}
+         {Array.from({ length: 6 }).map((_, i) => (
+         <div key={i} className="carousel-item">
+           <div className="carousel-dummy">Card {i + 1}</div>
+         </div>
+         ))}
       </div>
     </div>
   </section>

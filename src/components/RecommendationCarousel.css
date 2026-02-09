@@ -100,3 +100,17 @@
   overflow-x: auto;
   padding-bottom: 8px;
 }
+
+.carousel-item {
+  flex: 0 0 auto; /* prevents shrinking */
+}
+
+.carousel-dummy {
+  width: 260px;
+  height: 180px;
+  border: 1px solid var(--border-line);
+  background: var(--card-bg);
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+}

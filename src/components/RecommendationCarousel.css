@@ -110,12 +110,6 @@
   color: var(--accent);
 }
 
-.swiper-button-next::after,
-.swiper-button-prev::after {
-  font-size: 24px;
-}
-
-
 @media (max-width: 480px) {
   .swiper-button-next,
   .swiper-button-prev {
@@ -128,4 +122,33 @@
   width: 200px;          
   height: auto;
   display: flex;
+}
+
+/* make room left/right so cards never sit under arrows */
+.swiper {
+  padding-left: 44px;
+  padding-right: 44px;
+}
+
+/* keep arrows on the sides inside the safe zone */
+.swiper-button-prev,
+.swiper-button-next {
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+/* optional: make arrows look like your UI */
+.swiper-button-prev,
+.swiper-button-next {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--card-bg);
+  border: 1px solid var(--border-line);
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 14px;
 }

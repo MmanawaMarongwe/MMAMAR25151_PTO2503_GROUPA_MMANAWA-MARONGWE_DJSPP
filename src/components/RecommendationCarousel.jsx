@@ -1,67 +1,74 @@
-import { useMemo, useRef } from "react";
+import { useMemo } from "react";
 import { Link } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
 import { genres } from "../data";
-import PodcastCard from "./PodcastCard";
+
+import "swiper/css";
+import "swiper/css/navigation";
 import "./RecommendationCarousel.css"
 
-export default function RecommendationCarousel({
-  shows = [],
-  title = "Recommended for you",
-}) {
-    const scrollerRef = useRef(null);
+export default function RecommendationCarousel({ shows = [], title = "Recommended for you" }) {
+  const items = shows.slice(0, 12);
 
-    const genreMap = useMemo(() => {
+  const genreMap = useMemo(() => {
     const map = new Map();
     for (const g of genres) map.set(String(g.id), g.title);
     return map;
-}, []);
-        const items = useMemo(() => shows.slice(0, 12), [shows]);
-        return (
-  <section className="carousel-section">
-    <div className="carousel-header">
-      <h2 className="carousel-title">{title}</h2>
-
-      <div className="carousel-controls">
-        <button type="button" className="carousel-btn" aria-label="Previous">
-          ←
-        </button>
-        <button type="button" className="carousel-btn" aria-label="Next">
-          →
-        </button>
-      </div>
-       <div className="carousel-track" ref={scrollerRef}>
-         {items.map((show) => {
-  const showId = String(show.id);
-
-  const genreIds = (show.genres || show.genreIds || []).map(String);
-  const genreNames = genreIds
-    .map((id) => genreMap.get(id))
-    .filter(Boolean)
-    .slice(0, 3);
-
-  const seasonsCount =
-    typeof show.seasons === "number"
-      ? show.seasons
-      : Array.isArray(show.seasons)
-      ? show.seasons.length
-      : show.seasonCount ?? 0;
+  }, []);
 
   return (
-    <div key={showId} className="carousel-item">
-      <Link to={`/show/${showId}`} className="carousel-link">
-        <PodcastCard
-          title={show.title}
-          image={show.image}
-          seasons={seasonsCount}
-          genres={genreNames}
-          updated={show.updated ?? ""}
-        />
-      </Link>
-    </div>
-  );
-})}
+    <section className="carousel-section">
+      <div className="carousel-header">
+        <h2 className="carousel-title">{title}</h2>
       </div>
-    </div>
-  </section>
-);
+
+      <Swiper
+        modules={[Navigation]}
+        navigation
+        loop
+        spaceBetween={16}
+        slidesPerView={1.2}
+        breakpoints={{
+          480: { slidesPerView: 1.6 },
+          768: { slidesPerView: 2.4 },
+          1024: { slidesPerView: 3.2 },
+        }}
+      >
+        {items.map((show) => {
+          const genreIds = (show.genres || show.genreIds || []).map(String);
+          const tagTitles = genreIds
+            .map((id) => genreMap.get(id))
+            .filter(Boolean)
+            .slice(0, 3);
+
+          return (
+            <SwiperSlide key={show.id}>
+              <Link to={`/show/${show.id}`} className="carousel-link">
+                <div className="carousel-image-wrap">
+                  <img className="carousel-image" src={show.image} alt={show.title} loading="lazy" />
+                </div>
+
+                <div className="carousel-meta">
+                  <h3 className="carousel-show-title">{show.title}</h3>
+
+                  <div className="carousel-tags">
+                    {tagTitles.length ? (
+                      tagTitles.map((t) => (
+                        <span key={t} className="tag">
+                          {t}
+                        </span>
+                      ))
+                    ) : (
+                      <span className="text-muted">No genres</span>
+                    )}
+                  </div>
+                </div>
+              </Link>
+            </SwiperSlide>
+          );
+        })}
+      </Swiper>
+    </section>
+  );
 }

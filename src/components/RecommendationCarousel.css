@@ -1,15 +1,16 @@
-.carousel-section {
-  display: flex;
-  flex-direction: column;
-}
+/* =========================
+   Section + Header
+   ========================= */
 
-.carousel-header {
-  width: 100%;
+.carousel-section {
+  padding: 0 24px 24px;
+  position: relative;
 }
 
 .carousel-header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 12px;
   margin-bottom: 12px;
 }
@@ -18,55 +19,48 @@
   margin: 0;
 }
 
-.carousel-controls {
-  margin-left: auto;
-  display: flex;
-  gap: 8px;
-}
-
-.carousel-btn {
-  background: var(--card-bg);
-  color: var(--text);
-  border: 1px solid var(--border-line);
-  border-radius: 10px;
-  padding: 8px 10px;
-  cursor: pointer;
-}
-
-.carousel-btn:hover {
-  border-color: var(--accent);
-}
-
-.carousel-track {
-  display: flex;
-  gap: 16px;
-  overflow-x: auto;
-  padding-bottom: 10px;
-
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-
-}
-
-.carousel-track::-webkit-scrollbar {
-  height: 8px;
-}
-
-.carousel-card {
-  min-width: 240px;
-  max-width: 240px;
-  scroll-snap-align: start;
-
+.carousel-link {
+  display: block;
   text-decoration: none;
   color: inherit;
+}
 
+/* =========================
+   Swiper layout tweaks
+   (prevents weird sizing)
+   ========================= */
+
+.swiper {
+  padding-bottom: 12px; /* space for nav buttons + visuals */
+}
+
+.swiper-slide {
+  height: auto;
+  display: flex; /* lets the card stretch nicely */
+}
+
+
+.swiper-slide > a {
+  width: 80%;
+}
+
+
+/* =========================
+   Card styling
+   ========================= */
+
+.carousel-link {
   border-radius: 16px;
   border: 1px solid var(--border-line);
   background: var(--card-bg);
   overflow: hidden;
 }
 
-
+.carousel-image-wrap {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
 
 .carousel-image {
   width: 100%;
@@ -86,18 +80,52 @@
   font-size: 16px;
 }
 
-.carousel-track {
+/* Tags row */
+.carousel-tags {
   display: flex;
-  flex-direction: row;
-  gap: 16px;
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding-bottom: 8px;
-  -webkit-overflow-scrolling: touch;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
-.carousel-item {
-  flex: 0 0 auto;
+.tag {
+  color: var(--accent);
+  border: 1px solid var(--border-line);
+  background: transparent;
+  padding: 6px 10px;
+  font-size: 12px;
+  border-radius: 999px;
+}
+
+/* =========================
+   Swiper navigation styling
+   ========================= */
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: var(--text);
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  color: var(--accent);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 24px;
 }
 
 
+@media (max-width: 480px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    transform: scale(0.9);
+  }
+}
+
+
+.swiper-slide {
+  width: 200px;          
+  height: auto;
+  display: flex;
+}

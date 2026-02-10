@@ -1,4 +1,4 @@
-import  { createContext, useEffect, useState } from "react";
+import  { createContext, useEffect, useState, useContext } from "react";
 
 /**
  * Sorting options available to the user for viewing podcasts.
@@ -11,6 +11,8 @@ export const SORT_OPTIONS = [
   { key: "title-asc", label: "Title A → Z" },
   { key: "title-desc", label: "Title Z → A" },
 ];
+
+
 
 /**
  * React context for sharing podcast state across components.
@@ -135,4 +137,11 @@ export function PodcastProvider({ children, initialPodcasts = [] }) {
   return (
     <PodcastContext.Provider value={value}>{children}</PodcastContext.Provider>
   );
+  
+}
+
+export function usePodcasts() {
+  const ctx = useContext(PodcastContext);
+  if (!ctx) throw new Error("usePodcasts must be used within a PodcastProvider");
+  return ctx;
 }

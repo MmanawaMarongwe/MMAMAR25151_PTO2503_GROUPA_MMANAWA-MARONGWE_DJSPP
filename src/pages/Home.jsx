@@ -7,12 +7,16 @@ import { usePodcasts } from "../context/PodcastContext";
 
 
 export default function Home() {
-   const { podcasts } = usePodcasts();
+   const { podcasts, allPodcasts } = usePodcasts();
+
   return (
     <>
       <Filters />
       <main>
-        <RecommendationCarousel shows={podcasts} />
+        <RecommendationCarousel
+   shows={allPodcasts}
+  excludeIds={podcasts.map((p) => String(p.id))}
+/>
         <PodcastGrid />
         <Pagination />
       </main>

@@ -3,19 +3,32 @@ import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { genres } from "../data";
+import { useFavorites } from "../context/FavoritesContext";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "./RecommendationCarousel.css"
 
-export default function RecommendationCarousel({ shows = [], title = "Recommended for you" }) {
-  const items = shows.slice(0, 12);
+export default function RecommendationCarousel({ shows = [], excludeIds = [], title = "Recommended for you" }) {
+  const { favorites } = useFavorites();
 
   const genreMap = useMemo(() => {
     const map = new Map();
     for (const g of genres) map.set(String(g.id), g.title);
     return map;
   }, []);
+
+  const favoriteShowIds = useMemo(() => {
+    return new Set(Object.keys(favorites || {}).map(String));
+  }, [favorites]);
+
+   const excludeSet = useMemo(() => new Set(excludeIds.map(String)), [excludeIds]);
+
+const items = useMemo(() => {
+  const limit = 12;
+  const pool = shows.filter((s) => !excludeSet.has(String(s.id)));
+  return pool.slice(0, limit);
+}, [shows, excludeSet]);
 
   return (
     <section className="carousel-section">

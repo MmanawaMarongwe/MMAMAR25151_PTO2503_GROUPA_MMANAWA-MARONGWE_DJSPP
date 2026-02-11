@@ -132,6 +132,8 @@ export function PodcastProvider({ children, initialPodcasts = [] }) {
     podcasts: paged,
     allPodcastsCount: filtered.length,
     pageSize,
+
+    allPodcasts: filtered,
   };
 
   return (

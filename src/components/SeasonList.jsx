@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { useFavorites } from "../context/FavoritesContext"; 
+import { useAudioPlayer } from "../context/AudioContext";
 
 /**
  * SeasonList
@@ -15,6 +16,7 @@ import { useFavorites } from "../context/FavoritesContext";
 export default function SeasonList({ seasons = [],showId, showTitle}) {
   const [openSeasonKey, setOpenSeasonKey] = useState(null);
   const { toggleFavorite, isEpisodeFavorited } = useFavorites();
+  const { playTrack } = useAudioPlayer();
 
    
   function toggleSeason(key) {
@@ -90,6 +92,22 @@ export default function SeasonList({ seasons = [],showId, showTitle}) {
                                 {favorited ? "❤️" : "🤍"}
                           </button>
                         </div>
+                        <button
+  type="button"
+  className="play-btn"
+  onClick={(e) => {
+    e.stopPropagation();
+    playTrack({
+      src: ep.file,
+      title: epTitle,
+      showTitle: showTitle,        // you’ll pass this in as a prop
+      seasonNumber: season.season ?? i + 1,
+      episodeNumber: epNumber,
+    });
+  }}
+>
+  ▶ 
+</button>
                       </div>
                     </div>
                   );

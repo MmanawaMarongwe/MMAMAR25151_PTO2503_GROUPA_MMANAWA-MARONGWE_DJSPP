@@ -3,15 +3,19 @@ import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import { fetchPodcasts } from "./api/fetchData";  
-import { PodcastProvider, FavoritesProvider, AudioContext } from "./context/index";
+import { PodcastProvider } from "./context/PodcastContext";
+import { FavoritesProvider } from "./context/FavoritesContext";
+import { AudioPlayerProvider } from "./context/AudioContext";
 
 import Home from "./pages/Home";
 import ShowDetail from "./pages/ShowDetail";
 import Favorites from "./pages/Favorites"
+import GlobalAudioPlayer from "./components/GlobalAudioPlayer";
+
 
 import { ErrorBoundary, Header } from "./UI/index";
 import "./App.css";
-import { AudioPlayerProvider } from "./context/AudioContext";
+
 
 export default function App() {
   const [podcasts, setPodcasts] = useState([]);
@@ -71,18 +75,19 @@ export default function App() {
         {!error && loading && <p>Loading Podcasts</p>}
 
         {!error && !loading && (
-          <AudioPlayerProvider>
-            <PodcastProvider initialPodcasts={podcasts}>
-              <FavoritesProvider>
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/show/:id" element={<ShowDetail />} />
-                  <Route path="/favorites" element={<Favorites />} />
-                </Routes>
-              </FavoritesProvider>
-            </PodcastProvider>
-          </AudioPlayerProvider>
-        )}
+            <AudioPlayerProvider>
+              <PodcastProvider initialPodcasts={podcasts}>
+                <FavoritesProvider>
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/show/:id" element={<ShowDetail />} />
+                    <Route path="/favorites" element={<Favorites />} />
+                  </Routes>
+                </FavoritesProvider>
+              </PodcastProvider>
+              <GlobalAudioPlayer />
+            </AudioPlayerProvider>
+          )}
       </ErrorBoundary>
     </>
   );

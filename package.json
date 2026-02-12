@@ -12,6 +12,7 @@
   "dependencies": {
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-h5-audio-player": "^3.10.1",
     "react-router-dom": "^7.13.0",
     "swiper": "^12.1.0"
   },

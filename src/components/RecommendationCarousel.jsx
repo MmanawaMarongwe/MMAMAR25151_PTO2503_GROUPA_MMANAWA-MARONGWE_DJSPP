@@ -40,7 +40,7 @@ const items = useMemo(() => {
         modules={[Navigation]}
         navigation
         loop
-        spaceBetween={16}
+        spaceBetween={4}
         slidesPerView={1.2}
         breakpoints={{
           480: { slidesPerView: 1.6 },

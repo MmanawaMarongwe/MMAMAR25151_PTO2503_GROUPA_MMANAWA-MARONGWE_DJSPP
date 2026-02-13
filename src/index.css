@@ -8,6 +8,7 @@
   --pill-bg: #161b22;
   --card-hover-bg: #1a1f27;
   --page-active-text: #0d1117;
+  --player-height: 120px;
 }
 
 /* Light theme overrides (dark is the default theme) */
@@ -21,6 +22,10 @@ html[data-theme="light"] {
   --card-hover-bg: #f7f8fa;
   --page-active-text: #0d1117;
    scrollbar-gutter: stable;
+}
+
+main {
+  padding-bottom: var(--player-height);
 }
 
 body {

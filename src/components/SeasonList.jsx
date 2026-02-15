@@ -1,57 +1,49 @@
-import { useMemo, useState } from "react";
-import { useFavorites } from "../context/FavoritesContext"; 
-import { useAudioPlayer } from "../context/AudioContext";
+import { useState } from "react";
+import EpisodeRow from "./EpisodeRow";
 
 /**
  * SeasonList
  * Renders seasons as expandable rows. Each season can be expanded to reveal its episodes.
- *
- * Keeps existing class names so you can reuse CSS:
- * - season, season-row, season-title, episodes-count, text-muted
- *
- * @param {{ seasons?: any[] }} props
- * @returns {JSX.Element}
  */
-
-export default function SeasonList({ seasons = [],showId, showTitle}) {
+export default function SeasonList({ seasons = [], showId, showTitle }) {
   const [openSeasonKey, setOpenSeasonKey] = useState(null);
-  const { toggleFavorite, isEpisodeFavorited } = useFavorites();
-  const { playTrack } = useAudioPlayer();
 
-   
   function toggleSeason(key) {
-    setOpenSeasonKey((prev) => (prev === key ? null : key)); // ⭐
+    setOpenSeasonKey((prev) => (prev === key ? null : key));
   }
 
   return (
     <>
       {seasons.map((season, i) => {
         const key = season?.id ?? i;
-        const isOpen = openSeasonKey === key; // ⭐
-        const seasonNum = i + 1;
-        
+        const isOpen = openSeasonKey === key;
+
+        const seasonNum = season?.season ?? i + 1;
+        const episodes = season?.episodes || [];
+
         return (
           <div className="season" key={key}>
             <div
               className="season-row"
               role="button"
               tabIndex={0}
-              onClick={() => toggleSeason(key)} // ⭐
+              onClick={() => toggleSeason(key)}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === " ") toggleSeason(key);
               }}
               style={{ cursor: "pointer" }}
             >
-              <strong className="season-title">{season?.title || `Season ${seasonNum}`}</strong>
+              <strong className="season-title">
+                {season?.title || `Season ${seasonNum}`}
+              </strong>
               <span className="text-muted episodes-count">
-                {(season?.episodes?.length || 0)} episode{(season?.episodes?.length || 0) === 1 ? "" : "s"}
+                {episodes.length} episode{episodes.length === 1 ? "" : "s"}
               </span>
             </div>
 
             {isOpen && (
               <div style={{ marginTop: "12px", marginLeft: "16px" }}>
-                {(season?.episodes || []).map((ep, idx) => {
-                  const epKey = ep?.id ?? `${key}-ep-${idx}`;
+                {episodes.map((ep, idx) => {
                   const epNumber = ep?.episode ?? idx + 1;
                   const epTitle = ep?.title || `Episode ${epNumber}`;
                   const epDescription = (ep?.description || "").trim();
@@ -59,57 +51,23 @@ export default function SeasonList({ seasons = [],showId, showTitle}) {
                     epDescription.length > 140
                       ? `${epDescription.slice(0, 140)}…`
                       : epDescription;
-                  const episodeId = ep?.id ?? `${showId}-s${seasonNum}-e${epNumber}`;
-                const favorited = isEpisodeFavorited(episodeId);
 
+                  const epKey = ep?.id ?? `${key}-ep-${idx}`;
 
                   return (
-                    <div key={epKey} className="season">
-                      <div className="season-row">
-                        <div>
-                          <strong className="season-title">#{epNumber} {epTitle}</strong>
-                          {shortDesc && (
-                            <p className="text-muted" style={{ marginTop: "6px" }}>
-                              {shortDesc}
-                            </p>
-                          )}
-
-                        
-                          <button
-                            type="button"
-                            className={`fav-btn ${favorited ? "is-fav" : ""}`}
-                            aria-label={favorited ? "Remove from favorites" : "Add to favorites"}
-                            title={favorited ? "Unfavorite" : "Favorite"}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              toggleFavorite({
-                              showId,
-                              showTitle,
-                              episodeId,
-                              episodeTitle: epTitle,
-                              seasonNumber: seasonNum,
-                              episodeNumber: epNumber})}}>
-                                {favorited ? "❤️" : "🤍"}
-                          </button>
-                        </div>
-                        <button
-  type="button"
-  className="play-btn"
-  onClick={(e) => {
-    e.stopPropagation();
-    playTrack({
-      src: ep.file,
-      title: epTitle,
-      showTitle: showTitle,        // you’ll pass this in as a prop
-      seasonNumber: season.season ?? i + 1,
-      episodeNumber: epNumber,
-    });
-  }}
->
-  ▶ 
-</button>
-                      </div>
-                    </div>
+                    <EpisodeRow
+                      key={epKey}
+                      showId={showId}
+                      showTitle={showTitle}
+                      episodeId={ep?.id ?? `${showId}-${seasonNum}-${epNumber}`}
+                      episodeTitle={epTitle}
+                      episodeNumber={epNumber}
+                      episodeSrc={ep?.file}
+                      seasonNumber={seasonNum}
+                      description={shortDesc}
+                      hideDescriptionOnMobile
+                      
+                    />
                   );
                 })}
               </div>

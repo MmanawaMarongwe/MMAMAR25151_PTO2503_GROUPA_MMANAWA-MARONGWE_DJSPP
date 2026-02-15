@@ -1,5 +1,5 @@
 .favorites-page {
-  padding: 24px;
+  padding: 12px 12px;
 }
 
 .favorites-title {
@@ -24,9 +24,9 @@
 }
 
 .favorites-groups {
-  margin-top: 20px;
+  margin-top: 16px;
   display: grid;
-  gap: 16px;
+  gap: 12px;
 }
 
 .favorites-show-title {
@@ -35,7 +35,7 @@
 
 .favorites-episodes {
   display: grid;
-  gap: 12px;
+  gap: 10px;
 }
 
 .favorites-episode {
@@ -45,4 +45,34 @@
 .favorites-episode-meta {
   display: grid;
   gap: 4px;
+}
+
+
+@media (min-width: 300px) and (max-width: 739px) {
+  .favorites-title{
+    font-size: 14px;
+  }
+
+  .favorites-page .favorites-sort label {
+    font-size: 12px;
+  }
+
+  .favorites-page {
+    padding: 10px 12px;
+  }
+
+  .favorites-header {
+    margin-bottom: 8px;
+  }
+
+  .favorites-groups {
+    margin-top: 12px;
+    gap: 12px;
+  }
+
+  .favorites-episodes {
+    gap: 8px;
+    padding: 20px;
+  }
+  
 }

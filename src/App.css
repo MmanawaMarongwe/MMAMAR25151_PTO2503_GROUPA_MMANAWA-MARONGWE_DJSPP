@@ -92,6 +92,11 @@
   margin-right: 80px;
 }
 
+/* Hide burger/menu toggle by default (desktop/tablet). Mobile media query will show it. */
+.nav-toggle {
+  display: none;
+}
+
 .date-favicon-wrapper {
   display: flex;
   flex-direction: row;
@@ -130,6 +135,7 @@
 
   /* Ensure burger sits left, logo in middle, controls right */
   .nav-toggle {
+    display: inline-flex;
     order: 1;
   }
 

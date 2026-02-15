@@ -3,7 +3,7 @@
    ========================= */
 
 .carousel-section {
-  padding: 0 24px 24px;
+  padding: 24px 24px 24px 24px;
   position: relative;
 }
 
@@ -152,4 +152,18 @@
 .swiper-button-prev::after,
 .swiper-button-next::after {
   font-size: 14px;
+}
+
+
+@media (max-width: 739px) {
+  .carousel-title{
+    font-size: 14px;
+  }
+
+  .carousel-meta {
+    padding: 8px;
+  }
+  .carousel-show-title {
+    font-size: 10px;
+  }
 }

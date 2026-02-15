@@ -159,3 +159,24 @@ a:visited {
 .pod-cover {
   width: 216px;
 }
+
+@media (min-width: 300px) and (max-width: 739px) {
+
+  label {
+    font-size: 14px;
+  }
+
+  select,
+  input {
+    padding: 6px 8px;      /* smaller padding */
+    font-size: 14px;       /* smaller text */
+    margin: 4px 4px;       /* tighter spacing */
+    border-radius: 6px;
+  }
+
+  .search-bar {
+    margin-top: 8px;
+    margin-left: 8px;
+  }
+
+}

@@ -48,7 +48,7 @@ export default function EpisodeRow({
           
             <div className="episode-info">
               <strong className="season-title">
-                #{episodeNumber} {episodeTitle}
+                {episodeTitle}
               </strong>
               {showAddedAt && addedAt && (
                 <p className="text-muted" style={{ marginTop: "6px" }}>

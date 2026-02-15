@@ -1,4 +1,4 @@
-# 🎧 DJS06: React Podcast App – Global State, Playback & Persistence
+# 🎧 DJSPP: React Podcast App – Global State, Playback & Persistence
 
 ## Project Overview
 
@@ -27,22 +27,22 @@ The project demonstrates the ability to manage complex shared state, coordinate 
 
 ### 1. Global Audio Playback System
 
-- Single shared audio player accessible across the entire application.
-- Playback continues when navigating between pages.
-- Displays episode metadata including title, season, and episode.
-- Uses a unique `trackId` to correctly replay episodes.
-- Playback state persisted using `localStorage`.
-- Browser confirmation prompt shown when leaving during playback.
+✅ Single shared audio player accessible across the entire application.
+✅ Playback continues when navigating between pages.
+✅ Displays episode metadata including title, season, and episode.
+✅ Uses a unique `trackId` to correctly replay episodes.
+✅ Playback state persisted using `localStorage`.
+✅ Browser confirmation prompt shown when leaving during playback.
 
 ---
 
 ### 2. Episode Favourites System
 
-- Users can favourite or unfavourite individual episodes.
-- Favourites stored persistently using `localStorage`.
-- Episodes grouped by show for structured data management.
-- Dedicated Favourites page for easy access.
-- Sorting options include:
+✅ Users can favourite or unfavourite individual episodes.
+✅ Favourites stored persistently using `localStorage`.
+✅ Episodes grouped by show for structured data management.
+✅ Dedicated Favourites page for easy access.
+✅ Sorting options for show group include:
   - Title A–Z / Z–A
   - Newest added / Oldest added
 
@@ -50,19 +50,19 @@ The project demonstrates the ability to manage complex shared state, coordinate 
 
 ### 3. Recommended Shows Carousel
 
-- Horizontally scrollable carousel implemented using Swiper.js.
-- Displays recommended podcasts with images and genre tags.
-- Swipe and arrow navigation supported.
-- Responsive breakpoints adjust visible items by screen size.
-- Automatically excludes the currently viewed show when applicable.
+✅ Horizontally scrollable carousel implemented using Swiper.js.
+✅ Displays recommended podcasts with images and genre tags.
+✅ Swipe and arrow navigation supported.
+✅ Responsive breakpoints adjust visible items by screen size.
+✅ Automatically excludes the currently viewed show when applicable.
 
 ---
 
 ### 4. Theme Toggle & Personalisation
 
-- Light and Dark mode support using CSS variables.
-- Theme preference stored in `localStorage`.
-- Instant global UI updates across all components.
+✅ Light and Dark mode support using CSS variables.
+✅ Theme preference stored in `localStorage`.
+✅ Instant global UI updates across all components.
 
 ---
 
@@ -143,10 +143,9 @@ Prepared to explain:
 
 - How global audio playback persists across routes
 - Why Context API was chosen over prop drilling
-- How favourites are grouped and updated immutably
+- How favourites are grouped
 - How memoization improves rendering performance
 - How localStorage persistence is safely initialized
-- How SPA routing fallback works in production deployment
 - How asynchronous playback and navigation states are coordinated
 
 ---
@@ -222,7 +221,7 @@ The application is deployed as a single‑page React application with routing re
 2. Navigate into the project directory:
 
    ```bash
-   cd DJS06
+   cd DJSPP
    ```
 
 3. Install dependencies:

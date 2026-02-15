@@ -1,104 +1,370 @@
-# 🎧 DJS Portfolio Piece – Podcast App (React)
+# 🎧 DJS06: React Podcast App – Global State, Playback & Persistence
 
-## 📋 Overview
+## Project Overview
 
-In this final phase, you will enhance the podcast app you've been building throughout the DJS course. The app already includes a landing page with searchable, sortable, and filterable podcast previews, as well as a show detail page with season toggling.
+In this project, a fully featured podcast application is developed as the final evolution of the React Podcast Explorer. Building on dynamic routing and show detail navigation, this version introduces global state management, persistent user interactions, uninterrupted audio playback, and production deployment practices.
 
-This project introduces key new features including global audio playback, favouriting episodes, deployment best practices, UI enhancements, and optional listening progress tracking.
+Users can browse podcast shows, explore seasons and episodes, play audio across routes without interruption, favourite episodes, and personalise their experience through theme preferences — all while maintaining a responsive and seamless single‑page application experience.
 
-Your goal is to build a polished, production-ready React application that offers an engaging and seamless user experience.
-
-> **Tip:** You are encouraged to explore the React ecosystem to help implement features efficiently.
-
-## 🎯 Objectives
-
-- Implement a global audio player with full playback control
-- Add support for favouriting episodes with persistent storage
-- Introduce a recommended shows carousel on the landing page
-- Support theme toggling (light/dark mode)
-- Ensure robust routing and deploy the app with professional polish
-- Optionally track listening progress across episodes and sessions
-
-## 🚀 Core Features & User Stories
-
-### 🛠️ Setup and Deployment
-
-- Deploy your app to **Vercel** using a **custom domain or URL**
-- Add a **custom favicon** for easy identification in browser tabs
-- Use tools like [metatags.io](https://metatags.io) to set **rich social media preview metadata**
-- Ensure that direct access to dynamic routes (e.g. `/show/1`) works correctly (SPA routing fallback)
-
-### 🔊 Global Audio Player
-
-- Play audio using the provided **placeholder API**
-- Keep the player **fixed at the bottom** of the screen across all pages
-- Ensure **uninterrupted playback** when navigating between pages
-- Provide **play, pause, seek, and progress tracking**
-- Add a **confirmation prompt** on page reloads during playback
-
-### ❤️ Favourites
-
-- Allow users to **favourite or unfavourite episodes** via a button/icon
-- Use **localStorage** to persist favourites across sessions
-- Provide **visual feedback** for favourited items (e.g., filled heart)
-- Create a **favourites page** displaying all saved episodes
-- Display **associated show and season** for each favourite
-- Show the **date/time added** to favourites
-- **Group favourites by show title**
-- Add **sorting options**:
-  - A–Z / Z–A by title
-  - Newest / Oldest by date added
-
-### 🎠 Recommended Shows Carousel
-
-- Add a **horizontally scrollable carousel** to the landing page
-- Show each show’s **image, title, and genre tags**
-- Support **looping** and navigation via **swipe or arrows**
-- Clicking a carousel item should navigate to the **show’s detail page**
-
-### 🌗 Theme Toggle
-
-- Include a **toggle** for switching between light and dark mode
-- **Persist theme selection** using `localStorage`
-- Ensure the **entire app UI updates smoothly**
-- Use **appropriate icons** (e.g., sun/moon) to indicate current theme
-- Reflect selected theme across all views and components
-
-## 🌟 Stretch Goal – Listening Progress (Optional)
-
-- Save playback position per episode and **resume playback**
-- Mark episodes as **"finished"** once fully played
-- Display **progress indicators** for episodes in progress
-- Allow users to **reset listening history**
-- Save listening history in local storage
-
-## ✅ Deliverables
-
-- A fully functional and deployed podcast app
-- Source code in **GitHub** with clear commit history
-- Live demo link (**Vercel**)
-- (Optional) Short demo video
-
-## 💡 Tips
-
-- Prioritise **user experience** and **clean component structure**
-- Use **React best practices** (components, hooks, state management)
-- Ensure the app is **responsive** and **mobile-friendly**
-- Test localStorage and audio persistence thoroughly
-- Make use of the **React ecosystem** to accelerate development!
+The project demonstrates the ability to manage complex shared state, coordinate asynchronous behaviour across components, and implement production‑ready React architecture.
 
 ---
 
-## 🧑‍⚖️ Panel Review
+## Core Objectives
 
-After submitting your project, you will be required to present your work to a coach or panel of coaches.
+- Implement **global state management** using React Context API.
+- Create a **persistent global audio player** that continues playback across routes.
+- Enable **episode favouriting** with localStorage persistence.
+- Implement a **recommended shows carousel** for improved discovery.
+- Add a **light/dark theme toggle** with saved user preference.
+- Configure **SPA deployment routing** to prevent refresh 404 errors.
+- Handle asynchronous state safely during navigation and playback.
+- Maintain a fully **responsive UI** across mobile, tablet, and desktop devices.
 
-During this session, you must:
+---
 
-- **Demonstrate** all the features you have implemented in your application.
-- **Explain** how each feature was built, referring directly to your code (e.g., components, state, hooks, storage).
-- Discuss the **decisions** you made during development (e.g., choice of libraries, structure, naming conventions).
-- Break down the **logic** behind key functionalities (e.g., how audio persistence or favouriting works).
-- Be prepared to answer **questions** from the coaches about your project, code structure, and implementation choices.
+## Deliverables
 
-This is your opportunity to showcase both your technical and problem-solving skills—treat it like a real-world project revsiew.
+### 1. Global Audio Playback System
+
+- Single shared audio player accessible across the entire application.
+- Playback continues when navigating between pages.
+- Displays episode metadata including title, season, and episode.
+- Uses a unique `trackId` to correctly replay episodes.
+- Playback state persisted using `localStorage`.
+- Browser confirmation prompt shown when leaving during playback.
+
+---
+
+### 2. Episode Favourites System
+
+- Users can favourite or unfavourite individual episodes.
+- Favourites stored persistently using `localStorage`.
+- Episodes grouped by show for structured data management.
+- Dedicated Favourites page for easy access.
+- Sorting options include:
+  - Title A–Z / Z–A
+  - Newest added / Oldest added
+
+---
+
+### 3. Recommended Shows Carousel
+
+- Horizontally scrollable carousel implemented using Swiper.js.
+- Displays recommended podcasts with images and genre tags.
+- Swipe and arrow navigation supported.
+- Responsive breakpoints adjust visible items by screen size.
+- Automatically excludes the currently viewed show when applicable.
+
+---
+
+### 4. Theme Toggle & Personalisation
+
+- Light and Dark mode support using CSS variables.
+- Theme preference stored in `localStorage`.
+- Instant global UI updates across all components.
+
+---
+
+### 5. Production Deployment Configuration
+
+- Application deployed to **Vercel**.
+- SPA rewrite rule prevents 404 errors on refresh for dynamic routes.
+- Routes such as `/show/:id` load correctly in production.
+
+Example configuration:
+
+```json
+{
+  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+}
+```
+
+---
+
+### 6. Responsive Design
+
+- Mobile‑first layout adjustments.
+- Episode and content layouts adapt for smaller screens.
+- Carousel breakpoints optimise viewing across devices.
+
+---
+
+## Technical Concepts Demonstrated
+
+- React Context API for shared global state
+- Persistent state using localStorage
+- Controlled side effects with `useEffect`
+- Memoization using `useMemo`
+- Dynamic routing with React Router
+- Functional state updates
+- Separation of logic and presentation components
+- Production SPA deployment practices
+
+---
+
+## Local Development Setup
+
+Clone the repository:
+
+```bash
+git clone <repository-url>
+```
+
+Navigate to the project folder:
+
+```bash
+cd <project-folder>
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run development server:
+
+```bash
+npm run dev
+```
+
+Open in browser:
+
+```
+http://localhost:5173
+```
+
+---
+
+## Panel Review Preparation
+
+Prepared to explain:
+
+- How global audio playback persists across routes
+- Why Context API was chosen over prop drilling
+- How favourites are grouped and updated immutably
+- How memoization improves rendering performance
+- How localStorage persistence is safely initialized
+- How SPA routing fallback works in production deployment
+- How asynchronous playback and navigation states are coordinated
+
+---
+
+This project demonstrates the ability to design and implement a production‑ready React application featuring shared global state, persistent user interactions, optimized rendering patterns, and professional deployment configuration.
+
+# 🎧 React Podcast Explorer
+
+## 🚀 Overview
+
+This React podcast explorer app is a **podcast browsing and listening application** that allows users to browse shows, explore seasons and episodes, play podcast audio across pages, favourite episodes, and personalise their experience with theme preferences.
+
+Building on earlier podcast browsing functionality, this version introduces **global state management**, **persistent audio playback**, **episode favourites**, and **production deployment configuration**. The application fetches podcast data from an external API and maintains a **consistent and uninterrupted user experience**, ensuring playback, favourites, and UI preferences persist while navigating between routes.
+
+---
+
+## 🌐 Live Demo
+
+You can view the deployed application here:
+
+👉 **Live Demo:** <https://codecastapp.vercel.app/>
+
+The application is deployed as a single‑page React application with routing rewrites configured to ensure dynamic routes load correctly in production.
+
+---
+
+## ✨ Features
+
+- **Global Audio Player**: Play podcast episodes with uninterrupted playback across pages.
+- **Episode Favourites**: Favourite or unfavourite episodes and access them from a dedicated favourites view.
+- **Recommended Carousel**: Discover new podcasts through a responsive, horizontally scrollable recommendations carousel.
+- **Theme Toggle**: Switch between light and dark modes with preferences saved between sessions.
+- **Dynamic Routing**: Each podcast show has its own dedicated detail page.
+- **Persistent State**: Playback state, favourites, and theme settings are stored using localStorage.
+- **Responsive Design**: Optimised layouts for mobile, tablet, and desktop devices.
+- **Loading & Error States**: Clear feedback during data fetching or failures.
+
+---
+
+## 🛠️ Tech Stack
+
+- **React** (functional components & hooks)
+- **React Router** (dynamic routing)
+- **JavaScript (ES6+)**
+- **Fetch API**
+- **React Context API** (global state management)
+- **Swiper.js** (carousel implementation)
+- **CSS3** (responsive styling)
+- **Vercel** (deployment & SPA routing configuration)
+
+---
+
+## 📖 How to Use
+
+1. Start the application locally or access the live demo.
+2. Browse podcasts from the homepage.
+3. Select a podcast to open its **show detail page**.
+4. Explore seasons and episodes.
+5. Play episodes using the global audio player.
+6. Favourite episodes for quick access later.
+7. Toggle between light and dark themes at any time.
+
+---
+
+## ⚙️ Setup Instructions
+
+1. Clone the repository:
+
+   ```bash
+   git clone <repository-url>
+   ```
+
+2. Navigate into the project directory:
+
+   ```bash
+   cd DJS06
+   ```
+
+3. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+4. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+5. Open the app in your browser:
+
+   ```
+   http://localhost:5173
+   ```
+
+---
+
+## 🧪 Code Quality
+
+- Clean and modular React component structure.
+- Centralised global state management using React Context.
+- Separation of logic and presentation components.
+- Major components documented with **JSDoc comments**.
+- Consistent formatting across JavaScript, JSX, HTML, and CSS files.
+
+---
+
+## 🎯 Future Improvements
+
+- Add listening progress tracking per episode.
+- Introduce playback queue functionality.
+- Improve accessibility and keyboard navigation support.
+- Add UI animations and transitions for enhanced interaction.
+# 🎧 React Podcast Explorer
+
+## 🚀 Overview
+
+This React podcast explorer app is a **podcast browsing and listening application** that allows users to browse shows, explore seasons and episodes, play podcast audio across pages, favourite episodes, and personalise their experience with theme preferences.
+
+This project (DJSPP) focuses on **global state management**, **persistent audio playback**, **episode favourites**, **recommendation discovery**, and **production-ready routing**. The application fetches podcast data from an external API and maintains a **consistent and uninterrupted single‑page experience**, ensuring playback, favourites, and UI preferences persist while navigating between routes.
+
+## 🌐 Live Demo
+
+👉 **Live Demo:** <live-demo-url>
+
+Deployed as a single‑page React application with routing rewrites configured so dynamic routes load correctly in production.
+
+## ✨ Features
+
+- **Global Audio Player**: Persistent player that continues playback across routes and displays active episode metadata.
+- **Episode Favourites**: Favourite/unfavourite episodes with a dedicated favourites view and persistent storage.
+- **Favourites Sorting**: Sort favourites by Title A–Z / Z–A and Newest added / Oldest added.
+- **Recommended Carousel**: Responsive, horizontally scrollable recommendations carousel (Swiper.js) with swipe + arrow navigation.
+- **Theme Toggle**: Light/dark mode using CSS variables, saved between sessions.
+- **Dynamic Routing**: Dedicated show detail pages with stable navigation.
+- **Persistent State**: Playback state, favourites, and theme settings stored using localStorage.
+- **Loading & Error States**: Clear feedback during data fetching or failures.
+- **Responsive Design**: Mobile‑first layouts that adapt across mobile, tablet, and desktop.
+
+## 🛠️ Tech Stack
+
+- **React** (functional components & hooks)
+- **React Router** (dynamic routing)
+- **JavaScript (ES6+)**
+- **Fetch API**
+- **React Context API** (global state management)
+- **Swiper.js** (carousel implementation)
+- **CSS3** (responsive styling)
+- **Vercel** (deployment & SPA routing configuration)
+
+## 📖 How to Use
+
+1. Open the live demo or start the app locally.
+2. Browse podcasts from the homepage.
+3. Select a podcast to open its **show detail page**.
+4. Expand seasons to explore episodes.
+5. Play episodes using the global audio player.
+6. Favourite episodes for quick access later.
+7. Toggle between light and dark themes at any time.
+
+## ⚙️ Setup Instructions
+
+1. Clone the repository:
+
+   ```bash
+   git clone <repository-url>
+   ```
+
+2. Navigate into the project directory:
+
+   ```bash
+   cd DJSPP
+   ```
+
+3. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+4. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+5. Open the app in your browser:
+
+   ```
+   http://localhost:5173
+   ```
+
+## 🧪 Code Quality
+
+- Clean and modular React component structure.
+- Centralised global state using React Context (avoids prop drilling).
+- Controlled side effects with `useEffect` (e.g., persistence + playback sync).
+- Memoization using `useMemo` where appropriate to reduce unnecessary re-renders.
+- Separation of logic and presentation components for maintainability.
+- Major components and utilities documented with **JSDoc comments**.
+- Consistent formatting across JavaScript, JSX, HTML, and CSS files.
+
+## 📌 Assignment Requirements Covered
+
+- **Global state management** implemented using React Context API.
+- **Persistent global audio playback** across routes with episode metadata.
+- **Favourites system** with localStorage persistence and structured grouping.
+- **Favourites sorting** (title + date added).
+- **Recommendation carousel** implemented with Swiper.js and responsive breakpoints.
+- **Theme toggle** with stored user preference.
+- **SPA deployment routing** configured to prevent refresh 404s on dynamic routes.
+- **Responsive UI** across device sizes.
+- **Loading/error/empty states** handled gracefully during async fetching.
+
+## 🎯 Future Improvements
+
+- Add listening progress tracking per episode.
+- Introduce playback queue functionality.
+- Improve accessibility and keyboard navigation support.
+- Add UI animations and transitions for enhanced interaction.

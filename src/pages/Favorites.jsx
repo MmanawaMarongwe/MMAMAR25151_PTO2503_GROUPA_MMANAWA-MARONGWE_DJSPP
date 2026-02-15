@@ -1,18 +1,7 @@
 import { useMemo, useState } from "react";
 import { useFavorites } from "../context/FavoritesContext";
+import EpisodeRow from "../components/EpisodeRow";
 import "./Favorites.css";
-
-function formatAddedAt(iso) {
-  if (!iso) return "";
-  const d = new Date(iso);
-  return d.toLocaleString(undefined, {
-    year: "numeric",
-    month: "short",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-}
 
 function sortEpisodes(episodes, sortBy) {
   const list = [...episodes];
@@ -36,17 +25,16 @@ function sortEpisodes(episodes, sortBy) {
 }
 
 export default function Favorites() {
-  const { favorites, toggleFavorite } = useFavorites();
+  const { favorites } = useFavorites();
   const [sortBy, setSortBy] = useState("ADDED_NEWEST");
 
   const showGroups = useMemo(() => {
-    const groups = Object.values(favorites || {})
+    return Object.values(favorites || {})
       .map((g) => ({
         ...g,
         episodes: sortEpisodes(g.episodes || [], sortBy),
       }))
       .sort((a, b) => (a.showTitle || "").localeCompare(b.showTitle || ""));
-    return groups;
   }, [favorites, sortBy]);
 
   if (!showGroups.length) {
@@ -89,38 +77,17 @@ export default function Favorites() {
 
             <div className="favorites-episodes">
               {group.episodes.map((ep) => (
-                <div key={ep.episodeId} className="season-row favorites-episode">
-                  <div className="favorites-episode-meta">
-                    <strong className="season-title">
-                      S{ep.seasonNumber} · E{ep.episodeNumber} —{" "}
-                      {ep.episodeTitle}
-                    </strong>
-
-                    <span className="text-muted">
-                      Added: {formatAddedAt(ep.addedAt)}
-                    </span>
-                  </div>
-
-                  <button
-                    type="button"
-                    className="fav-btn is-fav"
-                    aria-label="Remove from favorites"
-                    title="Remove"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      toggleFavorite({
-                        showId: group.showId,
-                        showTitle: group.showTitle,
-                        episodeId: ep.episodeId,
-                        episodeTitle: ep.episodeTitle,
-                        seasonNumber: ep.seasonNumber,
-                        episodeNumber: ep.episodeNumber,
-                      });
-                    }}
-                  >
-                    ❤️
-                  </button>
-                </div>
+                <EpisodeRow
+                  key={ep.episodeId}
+                  showId={group.showId}
+                  showTitle={group.showTitle}
+                  seasonNumber={ep.seasonNumber}
+                  episodeId={ep.episodeId}
+                  episodeTitle={ep.episodeTitle}
+                  episodeNumber={ep.episodeNumber}
+                  episodeSrc={ep.episodeSrc}   
+                  
+                />
               ))}
             </div>
           </div>

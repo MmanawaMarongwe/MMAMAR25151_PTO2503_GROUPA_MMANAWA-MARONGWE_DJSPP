@@ -1,5 +1,6 @@
 import { useFavorites } from "../context/FavoritesContext";
 import { useAudioPlayer } from "../context/AudioContext";
+import { dateFormat } from "../utils/dateFormat";
 
 export default function EpisodeRow({
   // identity
@@ -22,6 +23,8 @@ export default function EpisodeRow({
   // optional UI
   description = "",
   hideDescriptionOnMobile = false,
+  addedAt,
+  showAddedAt = false,
 }) {
   const { toggleFavorite, isEpisodeFavorited } = useFavorites();
   const { playTrack } = useAudioPlayer();
@@ -47,6 +50,11 @@ export default function EpisodeRow({
               <strong className="season-title">
                 #{episodeNumber} {episodeTitle}
               </strong>
+              {showAddedAt && addedAt && (
+                <p className="text-muted" style={{ marginTop: "6px" }}>
+                Added {dateFormat(addedAt)}
+                  </p>
+              )}
 
               {!!description && (
               <p

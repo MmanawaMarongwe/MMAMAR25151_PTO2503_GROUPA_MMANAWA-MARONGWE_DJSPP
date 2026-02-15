@@ -1,6 +1,8 @@
 import { useMemo, useState } from "react";
 import { useFavorites } from "../context/FavoritesContext";
 import EpisodeRow from "../components/EpisodeRow";
+
+
 import "./Favorites.css";
 
 function sortEpisodes(episodes, sortBy) {
@@ -88,7 +90,8 @@ export default function Favorites() {
                   coverSrc={ep.seasonImage || group.showImage}
                   coverAlt={group.showTitle}
                   episodeSrc={ep.episodeSrc}   
-                  
+                  addedAt={ep.addedAt}
+                  showAddedAt
                 />
               ))}
             </div>

@@ -46,3 +46,17 @@
   display: grid;
   gap: 4px;
 }
+
+.favorites-page .season-row {
+  align-items: flex-start;
+}
+
+.favorites-page .episode-left {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.favorites-page .fav-btn {
+  align-self: flex-start;
+}

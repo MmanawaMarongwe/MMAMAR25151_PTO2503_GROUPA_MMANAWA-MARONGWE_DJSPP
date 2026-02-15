@@ -3,27 +3,62 @@ import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { genres } from "../data";
-import { useFavorites } from "../context/FavoritesContext";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "./RecommendationCarousel.css"
 
-export default function RecommendationCarousel({ shows = [], excludeIds = [], title = "Recommended for you" }) {
-  const { favorites } = useFavorites();
 
-  const genreMap = useMemo(() => {
+
+/**
+ * RecommendationCarousel
+ *
+ * Responsive carousel component that displays recommended shows.
+ *
+ * Responsibilities:
+ * - Filters out excluded shows (shows current in a specific page a user is in).
+ * - Limits the number of items displayed.
+ * - Renders a Swiper-based responsive slider.
+ *
+ * Performance Considerations:
+ * - useMemo is used to avoid recalculating derived data
+ *   unless dependencies change.
+ *
+ * @param {Object} props
+ * @param {Array<Object>} [props.shows=[]] - Full dataset of available shows.
+ * @param {Array<string|number>} [props.excludeIds=[]] - IDs to remove from display.
+ * @param {string} [props.title="Recommended for you"] - Section heading.
+ *
+ * @returns {JSX.Element}
+ */
+export default function RecommendationCarousel({ shows = [], excludeIds = [], title = "Recommended for you" }) {
+
+
+  /**
+ * Creates a lookup map of genreId > genreTitle.
+ * Converts IDs to strings for consistent comparison.
+ * Memoized to prevent unnecessary recalculation.
+ */
+ const genreMap = useMemo(() => {
     const map = new Map();
     for (const g of genres) map.set(String(g.id), g.title);
     return map;
   }, []);
 
-  const favoriteShowIds = useMemo(() => {
-    return new Set(Object.keys(favorites || {}).map(String));
-  }, [favorites]);
 
-   const excludeSet = useMemo(() => new Set(excludeIds.map(String)), [excludeIds]);
+/**
+ * Converts excluded IDs into a Set for efficient lookups.
+ * Prevents repeated array searches during filtering.
+ */
+const excludeSet = useMemo(() => new Set(excludeIds.map(String)), [excludeIds]);
 
+
+/**
+ * Derives the final list of carousel items.
+ * - Removes excluded shows.
+ * - Limits results to a maximum of 12 items.
+ * Memoized to recompute only when input data changes.
+ */
 const items = useMemo(() => {
   const limit = 12;
   const pool = shows.filter((s) => !excludeSet.has(String(s.id)));

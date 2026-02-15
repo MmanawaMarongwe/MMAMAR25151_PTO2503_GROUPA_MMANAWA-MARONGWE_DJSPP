@@ -1,10 +1,23 @@
 import { useMemo, useState } from "react";
 import { useFavorites } from "../context/FavoritesContext";
 import EpisodeRow from "../components/EpisodeRow";
-
-
 import "./Favorites.css";
 
+
+
+
+/**
+ * sortEpisodes
+ *
+ * Sorts a list of episode objects based on selected criteria.
+ * Supports alphabetical title sorting and chronological date sorting.
+ *
+ * A shallow copy is created before sorting to preserve immutability.
+ *
+ * @param {Array<Object>} episodes - Array of episode objects.
+ * @param {string} sortBy - Sorting strategy identifier.
+ * @returns {Array<Object>} Sorted episode array.
+ */
 function sortEpisodes(episodes, sortBy) {
   const list = [...episodes];
 
@@ -26,10 +39,39 @@ function sortEpisodes(episodes, sortBy) {
   }
 }
 
+
+/**
+ * Favorites Page
+ *
+ * Displays favorited episodes grouped by show.
+ *
+ * Responsibilities:
+ * - Retrieves favorites from global context.
+ * - Applies selected sorting option.
+ * - Groups episodes by show.
+ * - Renders EpisodeRow components for each episode.
+ *
+ * Derived state (showGroups) is memoized to prevent unnecessary recalculations
+ * when favorites or sorting criteria change.
+ *
+ * @returns {JSX.Element}
+ */
 export default function Favorites() {
   const { favorites } = useFavorites();
   const [sortBy, setSortBy] = useState("ADDED_NEWEST");
 
+
+
+  /**
+   * Derives grouped and sorted show data from favorites state.
+   *
+   * Steps:
+   * 1. Converts favorites object into an array of show groups.
+   * 2. Sorts episodes within each group using selected strategy.
+   * 3. Sorts show groups alphabetically by show title.
+   *
+   * Memoized to recompute only when favorites or sortBy changes.
+   */
   const showGroups = useMemo(() => {
     return Object.values(favorites || {})
       .map((g) => ({

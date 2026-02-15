@@ -4,6 +4,20 @@ import "react-h5-audio-player/lib/styles.css";
 import { useAudioPlayer } from "../context/AudioContext";
 import "./GlobalAudioPlayer.css";
 
+
+
+/**
+ * GlobalAudioPlayer – Persistent bottom audio player component.
+ *
+ * Consumes AudioPlayerContext to:
+ * - Display current track metadata.
+ * - Render a third-party audio player (react-h5-audio-player).
+ * - Remount player when trackId changes to force playback refresh.
+ *
+ * Returns null if no track is selected.
+ *
+ * @returns {JSX.Element | null}
+ */
 export default function GlobalAudioPlayer() {
   const { track, isPlaying, setIsPlaying } = useAudioPlayer();
 

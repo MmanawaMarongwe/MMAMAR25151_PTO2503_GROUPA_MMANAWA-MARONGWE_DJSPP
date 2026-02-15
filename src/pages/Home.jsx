@@ -14,9 +14,9 @@ export default function Home() {
       <Filters />
       <main>
         <RecommendationCarousel
-   shows={allPodcasts}
-  excludeIds={podcasts.map((p) => String(p.id))}
-/>
+            shows={allPodcasts}
+            excludeIds={podcasts.map((p) => String(p.id))}
+        />
         <PodcastGrid />
         <Pagination />
       </main>

@@ -6,7 +6,26 @@ const STORAGE_KEY = "app-favorites";
 
 /**
  * FavoritesProvider
- * Manages episode-level favorites and persists them in localStorage
+ *
+ * Global state manager for episode-level favorites.
+ *
+ * Responsibilities:
+ * - Stores favorites grouped by showId.
+ * - Restores persisted data from localStorage on initial render.
+ * - Persists changes automatically when favorites state updates.
+ *
+ * Data Model:
+ * {
+ *   [showId]: {
+ *     showId,
+ *     showTitle,
+ *     showImage,
+ *     episodes: [ { episodeId, episodeTitle, ... } ]
+ *   }
+ * }
+ *
+ * Functional state updates are used to safely derive the next state
+ * from the previous state.
  */
 export function FavoritesProvider({ children }) {
   const [favorites, setFavorites] = useState(() => {
@@ -23,9 +42,22 @@ export function FavoritesProvider({ children }) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(favorites));
   }, [favorites]);
 
+
   /**
-   * Toggle an episode as favorite / unfavorite
-   */
+ * Adds or removes an episode from favorites.
+ *
+ * Behavior:
+ * - If the episode already exists, it is removed.
+ * - If removal results in zero episodes for a show,
+ *   the entire show group is removed from state.
+ * - If the episode does not exist, it is added with a timestamp.
+ *
+ * Uses a functional state update to avoid stale closures
+ * and ensure correctness when multiple updates occur.
+ *
+ *
+ * @param {Object} params - Show and episode metadata.
+ */
   function toggleFavorite({
     showId,
     showTitle,

@@ -68,11 +68,12 @@
   .favorites-groups {
     margin-top: 12px;
     gap: 12px;
+    padding: 24px;
   }
-
+ 
   .favorites-episodes {
     gap: 8px;
-    padding: 20px;
+    width: 75%;
   }
   
 }

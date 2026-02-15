@@ -29,9 +29,11 @@ export function FavoritesProvider({ children }) {
   function toggleFavorite({
     showId,
     showTitle,
+    showImage,
     episodeId,
     episodeTitle,
     seasonNumber,
+    seasonImage,
     episodeNumber,
     episodeSrc,
   }) {
@@ -71,6 +73,7 @@ export function FavoritesProvider({ children }) {
         episodeTitle,
         seasonNumber,
         episodeNumber,
+        seasonImage,
         episodeSrc,
         addedAt: new Date().toISOString(),
       };
@@ -80,6 +83,7 @@ export function FavoritesProvider({ children }) {
         [showId]: {
           showId,
           showTitle,
+          showImage, 
           episodes: showGroup
             ? [...showGroup.episodes, newEpisode]
             : [newEpisode],

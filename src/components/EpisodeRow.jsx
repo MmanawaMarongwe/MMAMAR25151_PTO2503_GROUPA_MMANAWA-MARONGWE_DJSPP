@@ -5,15 +5,19 @@ export default function EpisodeRow({
   // identity
   showId,
   showTitle,
+  showImage,
 
   // episode
   episodeId,
   episodeTitle,
   episodeNumber,
   episodeSrc,
+  coverAlt,
+  coverSrc,
 
   // season
   seasonNumber,
+  seasonImage,
 
   // optional UI
   description = "",
@@ -25,45 +29,65 @@ export default function EpisodeRow({
   const favorited = isEpisodeFavorited(episodeId);
 
   return (
-    <div className="season">
       <div className="season-row">
+         
           <div className="episode-left">
-          <strong className="season-title">
-            #{episodeNumber} {episodeTitle}
-          </strong>
+             <div>
+              {coverSrc && (
+              <img
+                className="episode-cover"
+                src={coverSrc}
+                alt={coverAlt || `${showTitle} cover`}
+                loading="lazy"
+              />
+              )}
+            </div>
+          
+            <div className="episode-info">
+              <strong className="season-title">
+                #{episodeNumber} {episodeTitle}
+              </strong>
 
-          {!!description && (
-            <p
-              className={`text-muted ${hideDescriptionOnMobile ? "episode-desc" : ""}`}
-              style={{ marginTop: "6px" }}
-            >
-              {description}
-            </p>
-          )}
+              {!!description && (
+              <p
+                className={`text-muted ${hideDescriptionOnMobile ? "episode-desc" : ""}`}
+                style={{ marginTop: "6px" }}
+              >
+                {description}
+              </p>
+                )}
+            </div>
+          
+
+            
+        </div>
+    
+        <div className="action-buttons">
+          <button
+              type="button"
+              className={`fav-btn ${favorited ? "is-fav" : ""}`}
+              aria-label={favorited ? "Remove from favorites" : "Add to favorites"}
+              title={favorited ? "Unfavorite" : "Favorite"}
+              onClick={(e) => {
+                e.stopPropagation();
+                toggleFavorite({
+                  showId,
+                  showTitle,
+                  showImage,  
+                  episodeId,
+                  episodeTitle,
+                  seasonNumber,
+                  seasonImage,
+                  episodeNumber,
+                  episodeSrc,
+                });
+                }}
+              >
+                {favorited ? "❤️" : "🤍"}
+            </button>
+
 
           <button
-            type="button"
-            className={`fav-btn ${favorited ? "is-fav" : ""}`}
-            aria-label={favorited ? "Remove from favorites" : "Add to favorites"}
-            title={favorited ? "Unfavorite" : "Favorite"}
-            onClick={(e) => {
-              e.stopPropagation();
-              toggleFavorite({
-                showId,
-                showTitle,
-                episodeId,
-                episodeTitle,
-                seasonNumber,
-                episodeNumber,
-                episodeSrc
-              });
-            }}
-          >
-            {favorited ? "❤️" : "🤍"}
-          </button>
-        </div>
-
-        <button
           type="button"
           className="play-btn"
           onClick={(e) => {
@@ -75,12 +99,14 @@ export default function EpisodeRow({
               seasonNumber,
               episodeNumber,
               
+              
             });
           }}
         >
-          ▶
+          ▶ Play
         </button>
-      </div>
-    </div>
+        </div>
+        
+      </div>  
   );  
 }

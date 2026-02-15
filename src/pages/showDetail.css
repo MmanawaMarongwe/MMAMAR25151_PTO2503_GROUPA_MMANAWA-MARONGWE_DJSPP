@@ -95,14 +95,11 @@
   color: var(--accent);
   border: 1px solid var(--border-line);
 
-  width: 36px;
   height: 36px;
-
-  padding: 0;              /* important */
-  line-height: 1;          /* important */
+  padding: 0px 16px;
   border-radius: 10px;
 
-  font-size: 16px;
+  font-size: 12px;
   cursor: pointer;
 }
 .play-btn:hover {
@@ -114,6 +111,35 @@
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
+
+.episode-cover {
+  width: 72px;
+  height: 72px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 1px solid var(--border-line);
+  background: var(--card-bg);
+}
+
+.episode-left{
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.episode-info{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.action-buttons{
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+}
+
+
 /*
 =============================================================
   RESPONSIVE BREAKPOINTS

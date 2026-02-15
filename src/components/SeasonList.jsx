@@ -5,7 +5,7 @@ import EpisodeRow from "./EpisodeRow";
  * SeasonList
  * Renders seasons as expandable rows. Each season can be expanded to reveal its episodes.
  */
-export default function SeasonList({ seasons = [], showId, showTitle }) {
+export default function SeasonList({ seasons = [], showId, showTitle,showImage }) {
   const [openSeasonKey, setOpenSeasonKey] = useState(null);
 
   function toggleSeason(key) {
@@ -58,11 +58,15 @@ export default function SeasonList({ seasons = [], showId, showTitle }) {
                     <EpisodeRow
                       key={epKey}
                       showId={showId}
-                      showTitle={showTitle}
+  showTitle={showTitle}
+  showImage={showImage}                 
+  seasonImage={season.image} 
                       episodeId={ep?.id ?? `${showId}-${seasonNum}-${epNumber}`}
                       episodeTitle={epTitle}
                       episodeNumber={epNumber}
-                      episodeSrc={ep?.file}
+                      episodeSrc={ep.file}
+                      coverSrc={season.image || showImage}
+                      coverAlt={showTitle}
                       seasonNumber={seasonNum}
                       description={shortDesc}
                       hideDescriptionOnMobile

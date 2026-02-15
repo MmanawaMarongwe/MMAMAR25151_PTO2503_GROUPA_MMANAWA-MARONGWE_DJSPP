@@ -85,6 +85,8 @@ export default function Favorites() {
                   episodeId={ep.episodeId}
                   episodeTitle={ep.episodeTitle}
                   episodeNumber={ep.episodeNumber}
+                  coverSrc={ep.seasonImage || group.showImage}
+                  coverAlt={group.showTitle}
                   episodeSrc={ep.episodeSrc}   
                   
                 />

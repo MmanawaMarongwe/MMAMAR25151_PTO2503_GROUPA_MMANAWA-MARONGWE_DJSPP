@@ -29,11 +29,14 @@ export function AudioPlayerProvider({ children }) {
   }, [track]);
 
   function playTrack(nextTrack) {
-    if (!nextTrack?.src) return;
+  if (!nextTrack?.src) return;
 
-    setTrack(nextTrack);
-    setIsPlaying(true);
-  }
+  setTrack({
+    ...nextTrack,
+    trackId: `${nextTrack.src}-${Date.now()}`, // unique
+  });
+  setIsPlaying(true);
+}
 
   function togglePlay() {
     setIsPlaying((prev) => !prev);

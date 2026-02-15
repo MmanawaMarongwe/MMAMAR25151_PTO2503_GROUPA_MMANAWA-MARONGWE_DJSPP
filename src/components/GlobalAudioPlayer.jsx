@@ -21,14 +21,7 @@ export default function GlobalAudioPlayer() {
         </div>
       </div>
 
-      <AudioPlayer
-        src={track.src}
-        autoPlay={isPlaying}
-        showSkipControls={false}
-        showJumpControls={false}
-        onPlay={() => setIsPlaying(true)}
-        onPause={() => setIsPlaying(false)}
-      />
+      <AudioPlayer key={track?.trackId} src={track?.src} autoPlay />
     </div>
   );
 }

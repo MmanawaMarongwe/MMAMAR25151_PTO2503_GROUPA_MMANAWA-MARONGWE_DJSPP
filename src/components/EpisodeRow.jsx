@@ -55,6 +55,7 @@ export default function EpisodeRow({
                 episodeTitle,
                 seasonNumber,
                 episodeNumber,
+                episodeSrc
               });
             }}
           >

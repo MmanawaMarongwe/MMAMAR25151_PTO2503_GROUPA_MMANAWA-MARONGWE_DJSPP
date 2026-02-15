@@ -33,6 +33,7 @@ export function FavoritesProvider({ children }) {
     episodeTitle,
     seasonNumber,
     episodeNumber,
+    episodeSrc,
   }) {
     setFavorites((prev) => {
       const showGroup = prev[showId];
@@ -70,6 +71,7 @@ export function FavoritesProvider({ children }) {
         episodeTitle,
         seasonNumber,
         episodeNumber,
+        episodeSrc,
         addedAt: new Date().toISOString(),
       };
 

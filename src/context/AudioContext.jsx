@@ -50,6 +50,25 @@ export function AudioPlayerProvider({ children }) {
     }
   }, [track]);
 
+  /**
+   * Prompts the user before refreshing or leaving the page
+   * if audio playback is currently active.
+   */
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      if (!isPlaying) return;
+
+      event.preventDefault();
+      event.returnValue = "";
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [isPlaying]);
+
 
 /**
  * Selects a new track and initiates playback.
